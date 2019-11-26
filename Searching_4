@@ -1,0 +1,24 @@
+def solve(points):
+    res = []
+    for i in range(len(points) - 1):
+        l, r = points[i], points[i + 1]
+        while True:
+            m = (l + r) / 2
+            f = sum(1 / (m - p) for p in points)
+            if round(f, 5) == 0:
+                res.append(m)
+                break
+            elif f > 0:
+                l = m
+            else:
+                r = m
+    return res
+
+
+if __name__ == "__main__":
+    for _ in range(int(input())):
+        input()
+        points = list(map(float, input().split()))
+        res = solve(points)
+        out = ['{:.2f}'.format(loc) for loc in res]
+        print(*out)
